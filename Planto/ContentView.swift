@@ -15,7 +15,7 @@ struct ContentView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.top, 12)
 
-                Text("Start a your plant journey!")
+                Text("Start your plant journey!!")
                     .font(.system(size: 25 , weight: .semibold))
                     .padding(.vertical,4)
                 Text("Now all your plants will be in one place and we will help you take care of them :)🪴")
