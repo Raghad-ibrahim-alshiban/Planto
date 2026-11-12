@@ -6,3 +6,48 @@
 //
 
 import Foundation
+//MARK: - WateringDay
+enum WateringDay :String , Identifiable, CaseIterable {
+    
+    case evreyD = "Every day"
+    case twoD = "Every 2 day"
+    case threeD = "Every 3 day"
+    case tenD = "Every 10 day"
+    case weekD = "Every 2 weeks"
+    
+    var id : String {rawValue}
+
+}
+//var intDay : int {
+
+
+//MARK: - Water
+
+
+enum Water : String , Identifiable, CaseIterable{
+    case twn = "20-50 ml"
+    case fif = "50-100 ml"
+    case one = "100-200 ml"
+    var id : String {rawValue}
+}
+
+//MARK: - Room
+enum Room : String , Identifiable, CaseIterable{
+    case bedr = "Bedroom"
+    case livingr = "Living Room"
+    case kitchen = "Kitchen"
+    case balcony = "Balcony"
+    case bathr = "Bathroom"
+    var id : String {rawValue}
+
+}
+
+
+//MARK: - Light
+enum Light :String , Identifiable, CaseIterable{
+    case full="Full sun"
+    case partials="Partial sun"
+    case low="Low Light"
+    var id : String {rawValue}
+
+}

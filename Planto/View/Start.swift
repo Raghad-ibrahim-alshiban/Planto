@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct Start: View {
     var body: some View {
         NavigationStack{
+            Divider()
+                    .background {Color.gray.opacity(0.3)}
             ZStack(alignment: .top){
                 Color("Background")
                     .ignoresSafeArea()
@@ -49,5 +51,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    Start()
 }

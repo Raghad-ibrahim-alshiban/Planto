@@ -6,3 +6,14 @@
 //
 
 import Foundation
+struct PlantoName : Identifiable {
+     let id = UUID()
+    var name :String
+    var wateringDay : WateringDay
+    var water : Water
+    var room : Room
+    var light : Light
+
+    var isChecked: Bool = false
+    
+}
