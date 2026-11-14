@@ -32,7 +32,7 @@ class ReminderView : ObservableObject {
         if completedCount == 0 {
             return "Your plants are waiting for a sip 💦"
         }else{
-            return "\(completedCount)of your plants feel loved today✨"
+            return "\(completedCount) of your plants feel loved today✨"
         }
         
         

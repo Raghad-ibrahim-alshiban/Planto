@@ -74,60 +74,7 @@ struct SetReminder: View {
                                 
                                 ForEach($serReminder.plants){$plant in
                                     
-                                    HStack {
-                                        Button{
-                                            plant.isChecked.toggle()
-                                        }label: {
-                                            Image(systemName: plant.isChecked ? "checkmark.circle.fill" : "circle")
-                                                .font(.system(size: 30))
-                                                .foregroundStyle(plant.isChecked ? .green : .gray)
-                                        }
-                                        VStack(alignment: .leading ,spacing: 8){
-                                            HStack{
-                                                Image(systemName: "location")
-                                                    .foregroundStyle(.gray)
-                                                
-                                                Text("in \(plant.room.rawValue) ")
-                                                    .font(.system(size: 16))
-                                                    .foregroundStyle(.gray)
-                                            }
-                                            
-                                            Text(plant.name)
-                                                .font(.system(size: 30 ,weight:.semibold))
-                                            HStack(spacing: 24){
-                                                HStack (spacing:18){
-                                                    Image(systemName: "sun.max")
-                                                        .font(.system(size: 14))
-                                                    Text(plant.light.rawValue)
-                                                        .font(.system(size: 12 ,weight: .medium))
-                                                }
-                                                .padding(.horizontal ,8)
-                                                .padding(.vertical ,4)
-                                                .background(Color.gray.opacity(0.2))
-                                                .foregroundStyle(.yellow)
-                                                .cornerRadius(8)
-                                                HStack (spacing:18){
-                                                    Image(systemName: "drop")
-                                                        .font(.system(size: 14))
-                                                    Text(plant.water.rawValue)
-                                                        .font(.system(size: 12 ,weight: .medium))
-                                                }
-                                                .padding(.horizontal ,8)
-                                                .padding(.vertical ,4)
-                                                .background(Color.gray.opacity(0.2))
-                                                .foregroundStyle(.blue)
-                                                .cornerRadius(8)
-                                                
-                                            }
-                                            
-                                        }
-                                        .padding()
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .background(Color.black)
-                                        .clipShape(RoundedRectangle(cornerRadius: 16))
-                                        .opacity(plant.isChecked ? 0.4 : 1.0)
-                                        
-                                    }
+                                    PlantCard(plant: $plant)
                                     Divider()
                                         .background {Color.gray.opacity(0.3)}
                                 }
@@ -170,86 +117,8 @@ struct SetReminder: View {
             //MARK: - Sheet
             
             .sheet(isPresented: $serReminder.showingSheet){
-                NavigationStack {
-                    Form {
-                        HStack{
-                            Text("Plant Name")
-                            TextField("", text: $serReminder.name , prompt: Text("Pothos") )
-
-                        }
-                        
-                        Section{
-                            Picker(selection: $serReminder.room){
-                                ForEach(Room.allCases){ item in Text(item.rawValue).tag(item)
-                                    
-                                }
-
-                            }
-                            label:{
-                                Label("Room", systemImage:"location")
-                                    .foregroundStyle(.white)
-                            }
-                            Picker(selection: $serReminder.light){
-                                ForEach(Light.allCases){ item in Text(item.rawValue).tag(item)
-                                    
-                                }
-
-                            }
-                            label:{
-                                Label("Light", systemImage:"sun.max")
-                                    .foregroundStyle(.white)
-                            }
-                        }
-                        Section{
-                            Picker(selection: $serReminder.wateringDay){
-                                ForEach(WateringDay.allCases){ item in Text(item.rawValue).tag(item)
-                                    
-                                }
-
-                            }
-                            label:{
-                                Label("Watering Days", systemImage:"drop")
-                                    .foregroundStyle(.white)
-                            }
-                            Picker(selection: $serReminder.water){
-                                ForEach(Water.allCases){ item in Text(item.rawValue).tag(item)
-                                    
-                                }
-
-                            }
-                            label:{
-                                Label("Water", systemImage:"drop")
-                                    .foregroundStyle(.white)
-                            }
-                        }
-                      
-                        
-                    }
-                    .navigationTitle("Set Reminder")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button {
-                                serReminder.showingSheet = false
-                            }label: {
-                                Image(systemName : "xmark")
-                            }
-                        }
-                        
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button {
-                                serReminder.addPlant()
-                            } label: {
-                                Image(systemName:"checkmark")
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .tint(Color.button)
-                        }
-                        
-                    }
-                }
                 
-                
+                AddPlantSheet(Sheet: serReminder)
                 
             }
             

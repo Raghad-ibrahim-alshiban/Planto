@@ -9,10 +9,21 @@ import SwiftUI
 
 @main
 struct PlantoApp: App {
+    @AppStorage("hasSeenStartView") var hasSeenStartView :Bool = false
+
     var body: some Scene {
         WindowGroup {
-            Start()
-                .preferredColorScheme(.dark)
+
+            if hasSeenStartView{
+                SetReminder()
+                    .preferredColorScheme(.dark)
+
+            }else{
+                Start()
+                    .preferredColorScheme(.dark)
+
+            }
         }
+
     }
 }

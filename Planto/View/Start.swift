@@ -13,7 +13,7 @@ struct Start: View {
             Divider()
                     .background {Color.gray.opacity(0.3)}
             ZStack(alignment: .top){
-                Color("Background")
+                Color("")
                     .ignoresSafeArea()
                 VStack(alignment: .center
                        , spacing:23)
