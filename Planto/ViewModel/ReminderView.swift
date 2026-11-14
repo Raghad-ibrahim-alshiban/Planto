@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 class ReminderView : ObservableObject {
+    
+    
     @Published var showingSheet : Bool = false
     
 
@@ -23,6 +25,17 @@ class ReminderView : ObservableObject {
         let completedCount = plants.filter { $0.isChecked }.count
         let totalCount = plants.count
         return totalCount > 0 ? Double(completedCount) / Double(totalCount) : 0.0
+    }
+    
+    var progressText :String {
+        let completedCount = plants.filter{$0.isChecked}.count
+        if completedCount == 0 {
+            return "Your plants are waiting for a sip 💦"
+        }else{
+            return "\(completedCount)of your plants feel loved today✨"
+        }
+        
+        
     }
     
     

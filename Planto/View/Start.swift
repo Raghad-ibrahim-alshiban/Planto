@@ -16,7 +16,8 @@ struct Start: View {
                 Color("Background")
                     .ignoresSafeArea()
                 VStack(alignment: .center
-                       , spacing:23) {
+                       , spacing:23)
+                {
                     Image(.imgPlanto)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.top, 45)

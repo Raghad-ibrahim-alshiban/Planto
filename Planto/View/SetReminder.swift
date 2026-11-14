@@ -19,95 +19,124 @@ struct SetReminder: View {
             Divider()
                     .background {Color.gray.opacity(0.3)}
           
-                ZStack(alignment: .center){
+            ZStack(alignment: .center){
+                
+                if serReminder.plants.isEmpty{
+                    Text("No reminders set yet.. ")
+                        .font(.system(size: 20 ,weight:.regular))
+                        .foregroundStyle(.grayText)
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     
-                    if serReminder.plants.isEmpty{
-                        Text("No reminders set yet.. ")
-                            .font(.system(size: 20 ,weight:.regular))
-                            .foregroundStyle(.grayText)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        
-                    }
-                    //MARK: - Card_Plant
+                }
+                //MARK: - All_Done
+                else{
+                    
+                    
+                    if serReminder.plants.filter({ $0.isChecked }).count == serReminder.plants.count{
+                        VStack(alignment: .center
+                               , spacing:23)
+                        {
+                            Image(.doneAll)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding(.top, 45)
+                            Text("All Done! 🎉")
+                                .font(.system(size: 25 , weight: .semibold))
 
-                    else{
-                        ScrollView{
-                            VStack(spacing:16){
-                                VStack(alignment:.center, spacing: 8) {
-                                    Text("Your plants are waiting for a sip 💦") // أو أي كلام تبينه يظهر فوق
-                                        .font(.system(size: 20, weight: .semibold ))
-                                        .foregroundStyle(.white)
-                                        .multilineTextAlignment(.center)
+                            Text("All Reminders Completed")
+                                .font(.system(size: 16 , weight: .semibold , ))
+                                .foregroundStyle(.grayText)
+                                .multilineTextAlignment(.center)
+                            
+                       
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                    
+                
+                    //MARK: - Progress
+                else{
+                    ScrollView{
+                        VStack(spacing:16){
+                            VStack(alignment:.center, spacing: 8) {
+                                Text(serReminder.progressText)
+                                .font(.system(size: 20, weight: .semibold ))
+                                    .foregroundStyle(.white)
+                                    .multilineTextAlignment(.center)
+                                
+                                ProgressView(value: serReminder.progress)
+                                    .tint(.green)
+                            }
+                            .padding(.horizontal)
+                            .padding(.top, 8)
+                            //MARK: - Card_Plant
+
+                            VStack(spacing:12) {
+                                
+                                ForEach($serReminder.plants){$plant in
                                     
-                                    ProgressView(value: serReminder.progress)
-                                        .tint(.green)
+                                    HStack {
+                                        Button{
+                                            plant.isChecked.toggle()
+                                        }label: {
+                                            Image(systemName: plant.isChecked ? "checkmark.circle.fill" : "circle")
+                                                .font(.system(size: 30))
+                                                .foregroundStyle(plant.isChecked ? .green : .gray)
+                                        }
+                                        VStack(alignment: .leading ,spacing: 8){
+                                            HStack{
+                                                Image(systemName: "location")
+                                                    .foregroundStyle(.gray)
+                                                
+                                                Text("in \(plant.room.rawValue) ")
+                                                    .font(.system(size: 16))
+                                                    .foregroundStyle(.gray)
+                                            }
+                                            
+                                            Text(plant.name)
+                                                .font(.system(size: 30 ,weight:.semibold))
+                                            HStack(spacing: 24){
+                                                HStack (spacing:18){
+                                                    Image(systemName: "sun.max")
+                                                        .font(.system(size: 14))
+                                                    Text(plant.light.rawValue)
+                                                        .font(.system(size: 12 ,weight: .medium))
+                                                }
+                                                .padding(.horizontal ,8)
+                                                .padding(.vertical ,4)
+                                                .background(Color.gray.opacity(0.2))
+                                                .foregroundStyle(.yellow)
+                                                .cornerRadius(8)
+                                                HStack (spacing:18){
+                                                    Image(systemName: "drop")
+                                                        .font(.system(size: 14))
+                                                    Text(plant.water.rawValue)
+                                                        .font(.system(size: 12 ,weight: .medium))
+                                                }
+                                                .padding(.horizontal ,8)
+                                                .padding(.vertical ,4)
+                                                .background(Color.gray.opacity(0.2))
+                                                .foregroundStyle(.blue)
+                                                .cornerRadius(8)
+                                                
+                                            }
+                                            
+                                        }
+                                        .padding()
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .background(Color.black)
+                                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                                        .opacity(plant.isChecked ? 0.4 : 1.0)
+                                        
+                                    }
+                                    Divider()
+                                        .background {Color.gray.opacity(0.3)}
                                 }
                                 .padding(.horizontal)
-                                .padding(.top, 8)
-                                
-                                VStack(spacing:12) {
-                                  
-                                    ForEach($serReminder.plants){$plant in
-                                      
-                                        HStack {
-                                            Button{
-                                                plant.isChecked.toggle()
-                                            }label: {
-                                                Image(systemName: plant.isChecked ? "checkmark.circle.fill" : "circle")
-                                                    .font(.system(size: 30))
-                                                    .foregroundStyle(plant.isChecked ? .green : .gray)
-                                            }
-                                            VStack(alignment: .leading ,spacing: 8){
-                                                HStack{
-                                                    Image(systemName: "location")
-                                                    Text("in \(plant.room.rawValue) ")}
-                                                
-                                                Text(plant.name)
-                                                    .font(.system(size: 20 ,weight:.semibold))
-                                                HStack(spacing: 24){
-                                                    HStack (spacing:18){
-                                                        Image(systemName: "sun.max.fill")
-                                                            .font(.system(size: 14))
-                                                        Text(plant.light.rawValue)
-                                                            .font(.system(size: 12 ,weight: .medium))
-                                                    }
-                                                    .padding(.horizontal ,8)
-                                                    .padding(.vertical ,4)
-                                                    .background(Color.gray.opacity(0.2))
-                                                    .clipShape(Capsule())
-//                                                    .foregroundStyle(.orange)
-//                                                    .cornerRadius(8)
-                                                    HStack (spacing:18){
-                                                        Image(systemName: "drop.fill")
-                                                            .font(.system(size: 14))
-                                                        Text(plant.water.rawValue)
-                                                            .font(.system(size: 12 ,weight: .medium))
-                                                    }
-                                                    .padding(.horizontal ,8)
-                                                    .padding(.vertical ,4)
-                                                    .background(Color.gray.opacity(0.2))
-                                                    .clipShape(Capsule())
-                                                    .foregroundStyle(.blue)
-                                                    .cornerRadius(8)
-                                                    
-                                                }
-                                                
-                                            }
-                                            .padding()
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .background(Color.black)
-                                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                                            .opacity(plant.isChecked ? 0.4 : 1.0)
-
-                                        }
-                                        Divider()
-                                                .background {Color.gray.opacity(0.3)}
-                                    }
-                                    .padding(.horizontal)
-                                }
-                            }.background(Color.black)
+                            }
                         }
+//                        .background(Color.black)
                     }
+                }}
                 
                     //MARK: - plus
 
