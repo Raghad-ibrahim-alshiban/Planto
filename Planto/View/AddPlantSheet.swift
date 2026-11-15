@@ -78,7 +78,11 @@ struct AddPlantSheet: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        Sheet.addPlant()
+                        if Sheet.editingPlantID == nil {
+                               Sheet.addPlant()
+                           } else {
+                               Sheet.updatePlant()
+                           }
                     } label: {
                         Image(systemName:"checkmark")
                     }
@@ -87,7 +91,8 @@ struct AddPlantSheet: View {
                 }
                 
             }
-        }    }
+        }
+    }
 }
 
 #Preview {

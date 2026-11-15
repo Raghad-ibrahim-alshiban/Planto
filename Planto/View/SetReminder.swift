@@ -73,8 +73,10 @@ struct SetReminder: View {
                             VStack(spacing:12) {
                                 
                                 ForEach($serReminder.plants){$plant in
-                                    
                                     PlantCard(plant: $plant)
+                                        .onTapGesture {
+                                                   serReminder.updatePlant()
+                                               }
                                     Divider()
                                         .background {Color.gray.opacity(0.3)}
                                 }
@@ -88,8 +90,7 @@ struct SetReminder: View {
                     //MARK: - plus
 
                 Button{
-                    serReminder.showingSheet = true
-                }
+                    serReminder.startAdding()                }
                 label:{
                    
                         Image(systemName: "plus")

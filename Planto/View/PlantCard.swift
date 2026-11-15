@@ -41,7 +41,7 @@ struct PlantCard: View {
                     .padding(.horizontal ,8)
                     .padding(.vertical ,4)
                     .background(Color.gray.opacity(0.2))
-                    .foregroundStyle(.yellow)
+                    .foregroundStyle(.sun)
                     .cornerRadius(8)
                     HStack (spacing:18){
                         Image(systemName: "drop")
@@ -52,7 +52,7 @@ struct PlantCard: View {
                     .padding(.horizontal ,8)
                     .padding(.vertical ,4)
                     .background(Color.gray.opacity(0.2))
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(.water)
                     .cornerRadius(8)
                     
                 }

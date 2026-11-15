@@ -16,6 +16,17 @@ enum WateringDay :String , Identifiable, CaseIterable {
     case weekD = "Every 2 weeks"
     
     var id : String {rawValue}
+    
+    
+    var intervall : Int {
+        switch self {
+        case .evreyD : return 1
+        case .twoD : return 2
+        case .threeD : return 3
+        case .tenD : return 10
+        case .weekD : return 14
+        }
+    }
 
 }
 //var intDay : int {
