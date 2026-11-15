@@ -68,19 +68,20 @@ struct SetReminder: View {
                             }
                             .padding(.horizontal)
                             .padding(.top, 8)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
                             //MARK: - Card_Plant
 
-                            VStack(spacing:12) {
+                      
                                 
                                 ForEach($serReminder.plants){$plant in
                                     PlantCard(plant: $plant)
                                         .onTapGesture {
                                             serReminder.startEditing(nameEdit: plant)                                               }
-                                    Divider()
-                                        .background {Color.gray.opacity(0.3)}
+                                  
                                         .listRowBackground(Color.clear)
                                         .listRowSeparatorTint(Color.gray.opacity(0.3))
-                                        .swipeActions(edge: .trailing,allowsFullSwipe: true) {
+                                        .swipeActions(edge:.trailing,allowsFullSwipe:true) {
                                             Button(role: .destructive) {
                                   serReminder.removePlant(plant)
                                         } label: {
@@ -88,8 +89,6 @@ struct SetReminder: View {
                                                         }
                                                     }
                                 }
-                                .padding(.horizontal)
-                            }
                         
                     }
                     .listStyle(.plain)
