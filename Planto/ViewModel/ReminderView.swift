@@ -93,6 +93,10 @@ class ReminderView : ObservableObject {
         water = nameEdit.water
         showingSheet = true
     }
-  
+    
+    
+    func removePlant(_ plant: PlantoName) {
+        plants.removeAll { $0.id == plant.id }
+    }
     
 }

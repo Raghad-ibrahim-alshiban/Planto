@@ -55,8 +55,8 @@ struct SetReminder: View {
                 
                     //MARK: - Progress
                 else{
-                    ScrollView{
-                        VStack(spacing:16){
+                    List{
+                        
                             VStack(alignment:.center, spacing: 8) {
                                 Text(serReminder.progressText)
                                     .font(.system(size: 18, weight: .regular ))
@@ -78,13 +78,24 @@ struct SetReminder: View {
                                             serReminder.startEditing(nameEdit: plant)                                               }
                                     Divider()
                                         .background {Color.gray.opacity(0.3)}
+                                        .listRowBackground(Color.clear)
+                                        .listRowSeparatorTint(Color.gray.opacity(0.3))
+                                        .swipeActions(edge: .trailing,allowsFullSwipe: true) {
+                                            Button(role: .destructive) {
+                                  serReminder.removePlant(plant)
+                                        } label: {
+                                              Image(systemName: "trash")
+                                                        }
+                                                    }
                                 }
                                 .padding(.horizontal)
                             }
-                        }
-//                        .background(Color.black)
+                        
                     }
-                }}
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
+                }
+                }
                 
                     //MARK: - plus
 

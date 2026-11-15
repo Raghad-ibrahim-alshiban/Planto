@@ -19,6 +19,7 @@ struct PlantCard: View {
                     .font(.system(size: 30))
                     .foregroundStyle(plant.isChecked ? .green : .gray)
             }
+            .buttonStyle(.borderless)
             VStack(alignment: .leading ,spacing: 8){
                 HStack{
                     Image(systemName: "location")
