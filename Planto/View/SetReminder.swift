@@ -59,7 +59,7 @@ struct SetReminder: View {
                         VStack(spacing:16){
                             VStack(alignment:.center, spacing: 8) {
                                 Text(serReminder.progressText)
-                                .font(.system(size: 20, weight: .semibold ))
+                                    .font(.system(size: 18, weight: .regular ))
                                     .foregroundStyle(.white)
                                     .multilineTextAlignment(.center)
                                 
