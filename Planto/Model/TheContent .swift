@@ -18,18 +18,18 @@ enum WateringDay :String , Identifiable, CaseIterable {
     var id : String {rawValue}
     
     
-    var intervall : Int {
+    var intervalSeconds: TimeInterval {
         switch self {
-        case .evreyD : return 1
-        case .twoD : return 2
-        case .threeD : return 3
-        case .tenD : return 10
-        case .weekD : return 14
+        case .evreyD:  return 1 * 86400
+        case .twoD:    return 2 * 86400
+        case .threeD:  return 3 * 86400
+        case .tenD:    return 10 * 86400
+        case .weekD:   return 14 * 86400
         }
     }
 
 }
-//var intDay : int {
+
 
 
 //MARK: - Water

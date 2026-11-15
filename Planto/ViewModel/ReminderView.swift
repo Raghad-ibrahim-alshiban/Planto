@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import UserNotifications
+
 class ReminderView : ObservableObject {
     
     
@@ -53,12 +55,9 @@ class ReminderView : ObservableObject {
     func addPlant(){
         let newplant = PlantoName(name: name, wateringDay: wateringDay, water: water, room: room, light: light)
         plants.append(newplant)
+        scheduleNotification(for: newplant)
         showingSheet = false
-        name = ""
-        room = .bedr
-        light = .full
-        wateringDay = .evreyD
-        water = .twn
+
     }
     
     func updatePlant() {
@@ -69,6 +68,9 @@ class ReminderView : ObservableObject {
             plants[index].light = light
             plants[index].wateringDay = wateringDay
             plants[index].water = water
+            
+            cancelNotification(for: plants[index])
+            scheduleNotification(for: plants[index])
         }
         editingPlantID = nil
         showingSheet = false
@@ -78,6 +80,9 @@ class ReminderView : ObservableObject {
 
     func deletePlant() {
         if let id = editingPlantID {
+            if let plant = plants.first(where: { $0.id == id }) {
+                cancelNotification(for: plant)
+            }
             plants.removeAll { $0.id == id }
         }
         editingPlantID = nil
@@ -96,7 +101,36 @@ class ReminderView : ObservableObject {
     
     
     func removePlant(_ plant: PlantoName) {
+        cancelNotification(for: plant)
         plants.removeAll { $0.id == plant.id }
+    }
+    
+    func requestNotificationPermission() {
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .sound]) { _, _ in }
+    }
+
+    func scheduleNotification(for plant: PlantoName) {
+        let content = UNMutableNotificationContent()
+        content.title = "Planto"
+        content.body = "Hey! let's water your plant"
+        content.sound = .default
+
+        let trigger = UNTimeIntervalNotificationTrigger(
+            timeInterval: plant.wateringDay.intervalSeconds ,
+            repeats: true
+        )
+        let request = UNNotificationRequest(
+            identifier: plant.id.uuidString,
+            content: content,
+            trigger: trigger
+        )
+        UNUserNotificationCenter.current().add(request)
+    }
+
+    func cancelNotification(for plant: PlantoName) {
+        UNUserNotificationCenter.current()
+            .removePendingNotificationRequests(withIdentifiers: [plant.id.uuidString])
     }
     
 }

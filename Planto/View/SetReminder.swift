@@ -123,6 +123,9 @@ struct SetReminder: View {
             .navigationTitle("My Plants 🌱")
             
             .navigationBarBackButtonHidden(true)
+            .onAppear {
+                serReminder.requestNotificationPermission()
+            }
             
             //MARK: - Sheet
             
