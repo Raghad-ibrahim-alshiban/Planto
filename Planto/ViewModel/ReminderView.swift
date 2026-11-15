@@ -83,6 +83,16 @@ class ReminderView : ObservableObject {
         editingPlantID = nil
         showingSheet = false
     }
+    
+    func startEditing(nameEdit: PlantoName) {
+        editingPlantID = nameEdit.id
+        name = nameEdit.name
+        room = nameEdit.room
+        light = nameEdit.light
+        wateringDay = nameEdit.wateringDay
+        water = nameEdit.water
+        showingSheet = true
+    }
   
     
 }

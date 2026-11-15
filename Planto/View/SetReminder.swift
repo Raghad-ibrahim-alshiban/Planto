@@ -75,8 +75,7 @@ struct SetReminder: View {
                                 ForEach($serReminder.plants){$plant in
                                     PlantCard(plant: $plant)
                                         .onTapGesture {
-                                                   serReminder.updatePlant()
-                                               }
+                                            serReminder.startEditing(nameEdit: plant)                                               }
                                     Divider()
                                         .background {Color.gray.opacity(0.3)}
                                 }

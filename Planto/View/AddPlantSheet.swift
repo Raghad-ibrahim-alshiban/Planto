@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct AddPlantSheet: View {
-    @ObservedObject var Sheet = ReminderView()
+    @ObservedObject var Sheet: ReminderView
     var body: some View {
         NavigationStack{
             Form {
+                Section{
                 HStack{
                     Text("Plant Name")
                     TextField("", text: $Sheet.name , prompt: Text("Pothos") )
-
+                    
                 }
-                
+            }
                 Section{
                     Picker(selection: $Sheet.room){
                         ForEach(Room.allCases){ item in Text(item.rawValue).tag(item)
@@ -62,9 +63,21 @@ struct AddPlantSheet: View {
                             .foregroundStyle(.white)
                     }
                 }
+                if Sheet.editingPlantID != nil {
+                    Section {
+                        Button {
+                            Sheet.deletePlant()
+                        }label: {
+                            Text("Delete Reminder")
+                                .foregroundStyle(.red)
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                }
               
                 
             }
+            .listSectionSpacing(.custom(54))
             .navigationTitle("Set Reminder")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -96,5 +109,5 @@ struct AddPlantSheet: View {
 }
 
 #Preview {
-    AddPlantSheet()
+    AddPlantSheet(Sheet: ReminderView())
 }
