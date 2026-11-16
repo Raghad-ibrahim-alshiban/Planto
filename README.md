@@ -1,37 +1,33 @@
-<div align="center">
+<h1 align="center">🌱 Planto</h1>
 
-# 🌱 Planto
+<p align="center">
+An iPhone app that helps you take care of your plants.<br>
+Add each plant with how often it needs water, and Planto reminds you when it is time.
+</p>
 
-A simple iPhone app that reminds you to water your plants.
+## Main Features
 
-![Swift](https://img.shields.io/badge/Swift-F05138?style=flat-square&logo=swift&logoColor=white)
-![SwiftUI](https://img.shields.io/badge/SwiftUI-0A84FF?style=flat-square&logo=swift&logoColor=white)
-![MVVM](https://img.shields.io/badge/MVVM-2E7D32?style=flat-square)
+- Add a plant with its name, room, light, watering day and water amount
+- Edit or delete a plant by tapping its card, or swipe the card to delete it
+- Check off each plant when you water it and watch the progress bar fill
+- See an "All Done" screen when every plant has been watered
+- Get a notification reminding you to water your plants
 
-<br>
+## Screenshots
 
-<img src="Screenshots/01-start.png" width="150"> <img src="Screenshots/04-add-plant.png" width="150"> <img src="Screenshots/06-my-plants.png" width="150"> <img src="Screenshots/08-swipe-delete.png" width="150"> <img src="Screenshots/07-all-done.png" width="150">
+<p align="center">
+  <img src="Screenshots/01-start.png" width="150">
+  <img src="Screenshots/04-add-plant.png" width="150">
+  <img src="Screenshots/06-my-plants.png" width="150">
+  <img src="Screenshots/08-swipe-delete.png" width="150">
+  <img src="Screenshots/07-all-done.png" width="150">
+</p>
 
-</div>
-
-<br>
-
-## Features
-
-- Add a plant with its room, light, watering day and water amount
-- Tap a plant to edit it, or swipe to delete it
-- Check off a plant when you water it and see your progress
-- Get a notification when it is time to water
-
-## Built With
+## Technologies Used
 
 - **Swift** and **SwiftUI** for the app and its interface
 - **MVVM** to keep the data, logic and screens separate
-- **UserNotifications** for the reminders
-
-## Run It
-
-Open `Planto.xcodeproj` in Xcode, choose an iPhone simulator, and press **Run**.
+- **UserNotifications** for the watering reminders
 
 ## Resources
 
@@ -41,6 +37,6 @@ Open `Planto.xcodeproj` in Xcode, choose an iPhone simulator, and press **Run**.
 
 I used Claude as a learning partner for hints and explanations, and I built and tested the app myself.
 
-<br>
+---
 
 **Raghad Ibrahim Alshiban**
