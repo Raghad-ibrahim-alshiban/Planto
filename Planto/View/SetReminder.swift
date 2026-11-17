@@ -10,8 +10,6 @@ import SwiftUI
 struct SetReminder: View {
 
     @ObservedObject var serReminder: ReminderView
-    
-//    @AppStorage("openSheetOnStart") var openSheetOnStart: Bool = false
     var body: some View {
         
         
@@ -33,7 +31,7 @@ struct SetReminder: View {
                 else{
                     
                     
-                    if serReminder.plants.filter({ $0.isChecked }).count == serReminder.plants.count{
+                    if serReminder.plants.filter({ $0.isChecked }).count == serReminder.plants.count {
                         VStack(alignment: .center
                                , spacing:23)
                         {
@@ -76,24 +74,25 @@ struct SetReminder: View {
 
                       
                                 
-                                ForEach($serReminder.plants){$plant in
-                                    PlantCard(plant: $plant)
-                                        .padding(.horizontal)
-                                        .onTapGesture {
-                                            serReminder.startEditing(nameEdit: plant)                                               }
-                                  
-                                        .listRowBackground(Color.clear)
-                                        .listRowInsets(EdgeInsets())
-                                        .listRowSeparatorTint(Color.gray.opacity(0.3))
-                                        .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
-                                        .swipeActions(edge:.trailing,allowsFullSwipe:true) {
-                                            Button(role: .destructive) {
-                                  serReminder.removePlant(plant)
+                        ForEach($serReminder.plants){$plant in
+                           
+                                PlantCard(plant: $plant)
+                                    .padding(.horizontal)
+                                    .onTapGesture {
+                                        serReminder.startEditing(nameEdit: plant)                                               }
+                                
+                                    .listRowBackground(Color.clear)
+                                    .listRowInsets(EdgeInsets())
+                                    .listRowSeparatorTint(Color.gray.opacity(0.3))
+                                    .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
+                                    .swipeActions(edge:.trailing,allowsFullSwipe:true) {
+                                        Button(role: .destructive) {
+                                            serReminder.removePlant(plant)
                                         } label: {
-                                              Image(systemName: "trash")
-                                                        }
-                                                    }
-                                }
+                                            Image(systemName: "trash")
+                                        }
+                                    }
+                            }
                         
                     }
                     .listStyle(.plain)
@@ -127,7 +126,7 @@ struct SetReminder: View {
             .navigationTitle("My Plants 🌱")
             
             .navigationBarBackButtonHidden(true)
-            .onAppear { serReminder.requestNotificationPermission() }
+            .onAppear { serReminder.requestNotificationPermission()}
             
             .onChange(of: serReminder.plants.map(\.isChecked)) {
                 withAnimation { serReminder.sortPlants() }

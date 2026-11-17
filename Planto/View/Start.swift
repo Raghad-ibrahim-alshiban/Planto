@@ -1,9 +1,6 @@
-//
-//  ContentView.swift
+
 //  Planto
-//
-//  Created by raghad2003 on 29/05/1448 AH.
-//
+
 
 import SwiftUI
 
@@ -42,9 +39,7 @@ struct Start: View {
                         .buttonStyle(.glassProminent)
                         .tint(Color.button)
                         .padding(.top, 65)
-                        .simultaneousGesture(TapGesture().onEnded {
-                            hasSeenStartView = true
-                        })
+                        
                     }
                 }
             }

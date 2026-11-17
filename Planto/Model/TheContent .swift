@@ -27,7 +27,6 @@ enum WateringDay :String , Identifiable, CaseIterable {
         case .weekD:   return 14 * 86400
         }
     }
-    var days: Int { Int(intervalSeconds / 86400) }
 
 }
 

@@ -24,7 +24,7 @@ class ReminderView : ObservableObject {
    
     @Published var plants :[PlantoName] = []
     
-    var todaysPlants: [PlantoName] { plants.filter { $0.isDueToday() } }
+  
     
     var progress: Double {
         let completedCount = plants.filter { $0.isChecked }.count
@@ -114,6 +114,8 @@ class ReminderView : ObservableObject {
     func sortPlants() {
         plants = plants.filter { !$0.isChecked } + plants.filter { $0.isChecked }
     }
+    
+
     
     func requestNotificationPermission() {
         UNUserNotificationCenter.current()
