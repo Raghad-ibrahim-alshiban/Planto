@@ -17,7 +17,7 @@ struct PlantCard: View {
             }label: {
                 Image(systemName: plant.isChecked ? "checkmark.circle.fill" : "circle")
                     .font(.system(size: 30))
-                    .foregroundStyle(plant.isChecked ? .green : .gray)
+                    .foregroundStyle(plant.isChecked ? .check : .gray)
             }
             .buttonStyle(.borderless)
             VStack(alignment: .leading ,spacing: 8){
@@ -26,12 +26,12 @@ struct PlantCard: View {
                         .foregroundStyle(.gray)
                     
                     Text("in \(plant.room.rawValue) ")
-                        .font(.system(size: 16))
+                        .font(.system(size: 15))
                         .foregroundStyle(.gray)
                 }
                 
                 Text(plant.name)
-                    .font(.system(size: 30 ,weight:.semibold))
+                    .font(.system(size: 28 ,weight:.semibold))
                 HStack(spacing: 24){
                     HStack (spacing:18){
                         Image(systemName: "sun.max")

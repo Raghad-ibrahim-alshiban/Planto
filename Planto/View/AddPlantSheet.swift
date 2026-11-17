@@ -98,7 +98,9 @@ struct AddPlantSheet: View {
                            }
                     } label: {
                         Image(systemName:"checkmark")
+                            .foregroundStyle(.white)
                     }
+                    .disabled(Sheet.name.isEmpty)
                     .buttonStyle(.borderedProminent)
                     .tint(Color.button)
                 }

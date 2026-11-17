@@ -10,6 +10,7 @@ import SwiftUI
 struct SetReminder: View {
 
     @StateObject var serReminder = ReminderView()
+    @AppStorage("openSheetOnStart") var openSheetOnStart: Bool = false
     var body: some View {
         
         
@@ -25,7 +26,6 @@ struct SetReminder: View {
                     Text("No reminders set yet.. ")
                         .font(.system(size: 20 ,weight:.regular))
                         .foregroundStyle(.grayText)
-//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     
                 }
                 //MARK: - All_Done
@@ -57,30 +57,34 @@ struct SetReminder: View {
                 else{
                     List{
                         
-                            VStack(alignment:.center, spacing: 8) {
+                            VStack(alignment:.center, spacing: 12) {
                                 Text(serReminder.progressText)
                                     .font(.system(size: 18, weight: .regular ))
                                     .foregroundStyle(.white)
                                     .multilineTextAlignment(.center)
                                 
                                 ProgressView(value: serReminder.progress)
-                                    .tint(.green)
+                                    .progressViewStyle(PlantProgressStyle())
+                                    .animation(.easeInOut, value: serReminder.progress)
                             }
-                            .padding(.horizontal)
                             .padding(.top, 8)
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
+                         
                             //MARK: - Card_Plant
 
                       
                                 
                                 ForEach($serReminder.plants){$plant in
                                     PlantCard(plant: $plant)
+                                        .padding(.horizontal)
                                         .onTapGesture {
                                             serReminder.startEditing(nameEdit: plant)                                               }
                                   
                                         .listRowBackground(Color.clear)
+                                        .listRowInsets(EdgeInsets())
                                         .listRowSeparatorTint(Color.gray.opacity(0.3))
+                                        .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
                                         .swipeActions(edge:.trailing,allowsFullSwipe:true) {
                                             Button(role: .destructive) {
                                   serReminder.removePlant(plant)
@@ -104,13 +108,12 @@ struct SetReminder: View {
                    
                         Image(systemName: "plus")
                         .font(.system(size: 24 , weight: .semibold))
-                            .frame(width: 30,height: 35)
+                            .frame(width: 44,height: 44)
 
                            }
-                .buttonStyle(.glassProminent)
-                .buttonBorderShape(.circle)
-                .tint(Color.button)
-                .padding(.trailing,20)
+                .buttonStyle(.plain)
+                .glassEffect(.regular.tint(Color.button).interactive(), in: .circle)
+                .padding(.trailing,24)
                 .padding(.bottom,12)
            
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment:.bottomTrailing)
@@ -124,9 +127,15 @@ struct SetReminder: View {
             
             .navigationBarBackButtonHidden(true)
             .onAppear {
-                serReminder.requestNotificationPermission()
+                if openSheetOnStart {
+                    serReminder.startAdding()
+                    openSheetOnStart = false
+                }
             }
             
+            .onChange(of: serReminder.plants.map(\.isChecked)) {
+                withAnimation { serReminder.sortPlants() }
+            }
             //MARK: - Sheet
             
             .sheet(isPresented: $serReminder.showingSheet){
@@ -137,6 +146,19 @@ struct SetReminder: View {
             
             
         }
+    }
+}
+
+struct PlantProgressStyle: ProgressViewStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                Capsule().fill(Color.gray.opacity(0.3))
+                Capsule().fill(Color.button)
+                    .frame(width: geo.size.width * (configuration.fractionCompleted ?? 0))
+            }
+        }
+        .frame(height: 7)
     }
 }
 #Preview {

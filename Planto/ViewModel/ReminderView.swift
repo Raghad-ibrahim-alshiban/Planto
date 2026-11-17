@@ -40,7 +40,7 @@ class ReminderView : ObservableObject {
         
         
     }
-    
+
     func startAdding() {
         editingPlantID = nil
         name = ""
@@ -54,6 +54,10 @@ class ReminderView : ObservableObject {
     
     func addPlant(){
         let newplant = PlantoName(name: name, wateringDay: wateringDay, water: water, room: room, light: light)
+        if !plants.isEmpty && plants.allSatisfy({ $0.isChecked }) {
+            plants.forEach { cancelNotification(for: $0) }
+            plants.removeAll()
+        }
         plants.append(newplant)
         scheduleNotification(for: newplant)
         showingSheet = false
@@ -103,6 +107,10 @@ class ReminderView : ObservableObject {
     func removePlant(_ plant: PlantoName) {
         cancelNotification(for: plant)
         plants.removeAll { $0.id == plant.id }
+    }
+    
+    func sortPlants() {
+        plants = plants.filter { !$0.isChecked } + plants.filter { $0.isChecked }
     }
     
     func requestNotificationPermission() {
