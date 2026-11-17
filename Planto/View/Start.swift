@@ -9,11 +9,9 @@ import SwiftUI
 
 struct Start: View {
     @AppStorage("hasSeenStartView") var hasSeenStartView: Bool = false
+    @ObservedObject var viewModel: ReminderView
     
-    @AppStorage("openSheetOnStart") var openSheetOnStart: Bool = false
     
-    @StateObject var start = ReminderView()
-
     
     var body: some View {
         NavigationStack{
@@ -34,20 +32,18 @@ struct Start: View {
                             .foregroundStyle(.grayText)
                             .multilineTextAlignment(.center)
                         
-                        NavigationLink(destination:SetReminder()){
-
-                                Text("Set Plant Reminder")
-
+                        Button {
+                            viewModel.startAdding()
+                        } label: {
+                            Text("Set Plant Reminder")
                                 .font(.system(size: 16, weight: .semibold))
-                                       .frame(width: 280, height: 35)
-                            
+                                .frame(width: 280, height: 35)
                         }
                         .buttonStyle(.glassProminent)
                         .tint(Color.button)
                         .padding(.top, 65)
                         .simultaneousGesture(TapGesture().onEnded {
                             hasSeenStartView = true
-                            openSheetOnStart = true
                         })
                     }
                 }
@@ -55,11 +51,17 @@ struct Start: View {
             .navigationTitle("My Plants 🌱")
             
             .onAppear {
-                start.requestNotificationPermission()}
+                viewModel.requestNotificationPermission()
+            }
+            .sheet(isPresented: $viewModel.showingSheet, onDismiss: {
+                if !viewModel.plants.isEmpty { hasSeenStartView = true }
+            }) {
+                AddPlantSheet(Sheet: viewModel)
+            }
         }
     }
 }
 
 #Preview {
-    Start()
+    Start(viewModel: ReminderView())
 }

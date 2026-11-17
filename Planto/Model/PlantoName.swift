@@ -16,4 +16,14 @@ struct PlantoName : Identifiable {
 
     var isChecked: Bool = false
     
+    var startDate: Date = Date()
+    var lastCheckedDate: Date? = nil
+    
+    func isDueToday() -> Bool {
+        let cal = Calendar.current
+        let start = cal.startOfDay(for: startDate)
+        let today = cal.startOfDay(for: Date())
+        let daysPassed = cal.dateComponents([.day], from: start, to: today).day ?? 0
+        return daysPassed % wateringDay.days == 0
+    }
 }

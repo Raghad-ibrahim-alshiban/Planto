@@ -10,20 +10,22 @@ import SwiftUI
 @main
 struct PlantoApp: App {
     @AppStorage("hasSeenStartView") var hasSeenStartView :Bool = false
-
+    
+    @StateObject private var viewModel = ReminderView()
     var body: some Scene {
         WindowGroup {
-
-            if hasSeenStartView{
-                SetReminder()
+            
+            if hasSeenStartView {
+                SetReminder(serReminder: viewModel)
                     .preferredColorScheme(.dark)
-
-            }else{
-                Start()
+                
+            } else {
+                Start(viewModel: viewModel)
                     .preferredColorScheme(.dark)
-
             }
+            
+            
+            
         }
-
     }
 }

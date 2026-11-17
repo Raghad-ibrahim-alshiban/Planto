@@ -9,8 +9,9 @@ import SwiftUI
 
 struct SetReminder: View {
 
-    @StateObject var serReminder = ReminderView()
-    @AppStorage("openSheetOnStart") var openSheetOnStart: Bool = false
+    @ObservedObject var serReminder: ReminderView
+    
+//    @AppStorage("openSheetOnStart") var openSheetOnStart: Bool = false
     var body: some View {
         
         
@@ -126,12 +127,7 @@ struct SetReminder: View {
             .navigationTitle("My Plants 🌱")
             
             .navigationBarBackButtonHidden(true)
-            .onAppear {
-                if openSheetOnStart {
-                    serReminder.startAdding()
-                    openSheetOnStart = false
-                }
-            }
+            .onAppear { serReminder.requestNotificationPermission() }
             
             .onChange(of: serReminder.plants.map(\.isChecked)) {
                 withAnimation { serReminder.sortPlants() }
@@ -162,5 +158,5 @@ struct PlantProgressStyle: ProgressViewStyle {
     }
 }
 #Preview {
-    SetReminder()
-}
+    SetReminder(serReminder: ReminderView())   
+    }

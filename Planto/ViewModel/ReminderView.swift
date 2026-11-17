@@ -24,6 +24,8 @@ class ReminderView : ObservableObject {
    
     @Published var plants :[PlantoName] = []
     
+    var todaysPlants: [PlantoName] { plants.filter { $0.isDueToday() } }
+    
     var progress: Double {
         let completedCount = plants.filter { $0.isChecked }.count
         let totalCount = plants.count
