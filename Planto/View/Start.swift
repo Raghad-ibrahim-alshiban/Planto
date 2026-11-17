@@ -49,7 +49,7 @@ struct Start: View {
                 viewModel.requestNotificationPermission()
             }
             .sheet(isPresented: $viewModel.showingSheet, onDismiss: {
-                if !viewModel.plants.isEmpty { hasSeenStartView = true }
+                hasSeenStartView = true 
             }) {
                 AddPlantSheet(Sheet: viewModel)
             }
