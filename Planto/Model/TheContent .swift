@@ -10,9 +10,10 @@ import Foundation
 enum WateringDay :String , Identifiable, CaseIterable {
     
     case evreyD = "Every day"
-    case twoD = "Every 2 day"
-    case threeD = "Every 3 day"
-    case tenD = "Every 10 day"
+    case twoD = "Every 2 days"
+    case threeD = "Every 3 days"
+    case weekO = "Once a week"
+    case tenD = "Every 10 days"
     case weekD = "Every 2 weeks"
     
     var id : String {rawValue}
@@ -23,6 +24,7 @@ enum WateringDay :String , Identifiable, CaseIterable {
         case .evreyD:  return 1 * 86400
         case .twoD:    return 2 * 86400
         case .threeD:  return 3 * 86400
+        case .weekO:   return 7 * 86400
         case .tenD:    return 10 * 86400
         case .weekD:   return 14 * 86400
         }
@@ -39,6 +41,7 @@ enum Water : String , Identifiable, CaseIterable{
     case twn = "20-50 ml"
     case fif = "50-100 ml"
     case one = "100-200 ml"
+    case twh = "200-300 ml"
     var id : String {rawValue}
 }
 

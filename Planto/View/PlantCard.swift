@@ -31,7 +31,7 @@ struct PlantCard: View {
                 }
                 
                 Text(plant.name)
-                    .font(.system(size: 28 ,weight:.semibold))
+                    .font(.system(size: 28 ,weight:.regular))
                 HStack(spacing: 24){
                     HStack (spacing:18){
                         Image(systemName: "sun.max")
