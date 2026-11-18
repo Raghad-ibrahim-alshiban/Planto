@@ -12,6 +12,7 @@ struct PlantoApp: App {
     @AppStorage("hasSeenStartView") var hasSeenStartView :Bool = false
     
     @StateObject private var viewModel = ReminderView()
+    
     var body: some Scene {
         WindowGroup {
             

@@ -1,4 +1,6 @@
-<h1 align="center">🌱 Planto</h1>
+<p align="center">
+  <img src="Screenshots/planto-banner.png" alt="Planto" width="100%">
+</p>
 
 <p align="center">
 An iPhone app that helps you take care of your plants.<br>
