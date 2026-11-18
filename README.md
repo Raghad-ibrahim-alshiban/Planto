@@ -23,6 +23,7 @@ Add each plant with how often it needs water, and Planto reminds you when it is 
   <img src="Screenshots/06-my-plants.png" width="150">
   <img src="Screenshots/08-swipe-delete.png" width="150">
   <img src="Screenshots/07-all-done.png" width="150">
+
 </p>
 
 ## Technologies Used
